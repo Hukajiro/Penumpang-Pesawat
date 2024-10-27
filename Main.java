@@ -27,7 +27,33 @@ class Flight {
             current.next = newPassenger;
         }
     }
-    
+
+    public void removePassenger(String name) {
+        if (head == null) {
+            System.out.println("Passenger list is empty.");
+            return;
+        }
+
+        // Jika penumpang yang akan dihapus ada di head
+        if (head.name.equals(name)) {
+            head = head.next;
+            System.out.println("Passenger " + name + " removed.");
+            return;
+        }
+
+        // Cari penumpang dengan nama yang cocok
+        Passenger current = head;
+        while (current.next != null) {
+            if (current.next.name.equals(name)) {
+                current.next = current.next.next;
+                System.out.println("Passenger " + name + " removed.");
+                return;
+            }
+            current = current.next;
+        }
+
+        System.out.println("Passenger " + name + " not found.");
+    }
 
     public void displayPassengers() {
         Passenger current = head;
@@ -46,8 +72,14 @@ class Flight {
 
         flight.addPassenger("wildan");
         flight.addPassenger("ofuk");
+        flight.addPassanger("apri");
 
         System.out.println("Passanger:");
+        flight.displayPassengers();
+
+        flight.removePassenger("ofuk");
+
+        System.out.println("\nPassenger list after removal:");
         flight.displayPassengers();
     }
 }
